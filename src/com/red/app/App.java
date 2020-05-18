@@ -23,8 +23,7 @@ public class App extends Application {
 	}
 
 	public static void main(String[] args) {
-		launch(args);
-
+		//launch(args);
 		Helpers helpers = new Helpers();
 		String test = helpers.grab_content("https://m.zingmp3.vn/xhr/media/get-source?type=audio&key=LHJHyZGNEpipdpSyGyDGLmTLpJiZLRmSv");
 		System.out.println(test);
