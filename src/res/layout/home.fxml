@@ -1,16 +1,134 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="master" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="root" fx:id="master" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.red.app.controll.HomeController">
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane fx:id="footer" prefHeight="100.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <AnchorPane fx:id="dialog" layoutX="10.0" layoutY="10.0" prefHeight="89.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="header" prefHeight="70.0" prefWidth="190.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="body" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
+      <AnchorPane id="mediaControll" fx:id="footer" minHeight="-Infinity" prefHeight="100.0" prefWidth="900.0" styleClass="z-depth-1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Pane layoutX="350.0" layoutY="250.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="250.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="250.0" />
-         </children>
-      </AnchorPane>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="900.0" spacing="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/pre.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/btn_play.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/next.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/b4461d303cba114b38429c6ea84d9fa2.jpg" />
+                           </image>
+                        </ImageView>
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="58.0" prefWidth="406.0">
+                                 <children>
+                                    <HBox prefHeight="29.0" prefWidth="406.0">
+                                       <children>
+                                          <HBox alignment="CENTER_LEFT" prefHeight="29.0" prefWidth="559.0">
+                                             <children>
+                                                <Label fx:id="artists" prefHeight="27.0" prefWidth="463.0" text="- Le Bao Binh" textFill="#c9c9c9">
+                                                   <graphic>
+                                                      <Label fx:id="songName" text="Thich thi den Thich thi den" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Segoe UI Semibold" size="18.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="Segoe UI Semibold" size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_RIGHT" prefHeight="29.0" prefWidth="245.0">
+                                             <children>
+                                                <Label fx:id="songTime" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="104.0" text="/05:30" textFill="#c9c9c9">
+                                                   <graphic>
+                                                      <Label fx:id="playingTime" text="00:00" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Segoe UI Semibold" size="17.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </graphic>
+                                                   <font>
+                                                      <Font name="Segoe UI Semibold" size="17.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <Slider focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="19.0" prefWidth="533.0">
+                                       <cursor>
+                                          <Cursor fx:constant="CLOSED_HAND" />
+                                       </cursor>
+                                    </Slider>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="38.0">
+                           <children>
+                              <ImageView fitHeight="38.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/volume.png" />
+                                 </image>
+                              </ImageView>
+                              <Pane layoutY="-205.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="175.0" prefWidth="45.0" visible="false">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#500961" height="175.0" stroke="#6c0779" strokeType="INSIDE" width="45.0" />
+                                    <VBox alignment="CENTER" prefHeight="175.0" prefWidth="45.0">
+                                       <children>
+                                          <Slider orientation="VERTICAL" prefHeight="145.0" prefWidth="19.0" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+            </HBox>
+         </children></AnchorPane>
    </children>
 </AnchorPane>

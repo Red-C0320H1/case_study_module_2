@@ -1,0 +1,42 @@
+* {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+#root {
+    -fx-background-color: #f6f6f6;
+}
+#mediaControll {
+    -fx-background-image: url('../images/bg-miniplayer-v1.png');
+    -fx-background-repeat:   no-repeat;
+    -fx-background-size:     cover;
+    -fx-background-position: center center;
+}
+.radius5 {
+    -fx-border-radius: 5;
+}
+.z-depth-1 {
+    -fx-effect: dropshadow(three-pass-box, black, 5, 0.1, 0, 1);
+}
+.z-depth-2 {
+    -fx-effect: dropshadow(three-pass-box, black, 10, 0.1, 0, 1);
+}
+.white {
+    -fx-background-color: #ffffff;
+}
+.border_bottom {
+    -fx-border-color: #f0f0f0;
+    -fx-border-style: solid;
+    -fx-border-width: 0px 0px 1px 0px;
+}
+.itemChart {
+    -fx-background-color: #ffffff;
+}
+.slider .thumb {
+    -fx-background-color: #b221e7;  /* Hide the track */
+}
+.slider .track {
+    -fx-background-color: #656565;
+    -fx-background-insets: 1 0 -1 0, 0, 1;
+    -fx-background-radius: 2.5, 2.5, 1.5;
+    -fx-padding: 0.208333em;
+}
