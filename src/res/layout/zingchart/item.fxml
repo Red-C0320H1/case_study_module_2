@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import java.net.URL?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,52 +7,44 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="688.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="item" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleClick" onMouseEntered="#handleEntered" onMouseExited="#handleExited" prefHeight="60.0" prefWidth="600.0" styleClass="white" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.red.app.controll.chart.ChartItemController">
    <children>
-      <Label alignment="CENTER" prefHeight="30.0" prefWidth="76.0" text="1">
+      <Label fx:id="sortNumber" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="61.0" styleClass="font-14" text="1">
          <font>
-            <Font name="Arial Bold" size="25.0" />
+            <Font name="Arial Bold" size="20.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="422.0" spacing="20.0">
+      <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="470.0" spacing="20.0">
          <children>
-            <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="thumb" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/b4461d303cba114b38429c6ea84d9fa2.jpg" />
                </image>
             </ImageView>
-            <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="356.0">
+            <VBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="400.0">
                <children>
-                  <Label text="Thích thì đến">
+                  <Label fx:id="title" styleClass="font-12" text="Thích thì đến">
                      <font>
-                        <Font name="Segoe UI Semibold" size="18.0" />
+                        <Font name="Segoe UI Semibold" size="14.0" />
                      </font>
                   </Label>
-                  <Label text="Lê bảo bình" textFill="#797979">
+                  <Label fx:id="artist" styleClass="font-11" text="Lê bảo bình" textFill="#797979">
                      <font>
-                        <Font name="Segoe UI Semibold" size="15.0" />
+                        <Font name="Segoe UI Semibold" size="12.0" />
                      </font>
                   </Label>
                </children>
             </VBox>
          </children>
       </HBox>
-      <Label text="5:00" textFill="#797979">
-         <font>
-            <Font name="Segoe UI Semibold" size="17.0" />
-         </font>
-      </Label>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="duration" styleClass="font-11" text="5:00" textFill="#797979">
+               <font>
+                  <Font name="Segoe UI Semibold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
    </children>
-   <padding>
-      <Insets right="30.0" />
-   </padding>
-   <stylesheets>
-      <URL value="@../../css/border_button_f0f0f0.css" />
-      <URL value="@../../css/background_fff.css" />
-   </stylesheets>
-   <styleClass>
-      <String fx:value="border_button_f0f0f0" />
-      <String fx:value="backgrounf_white" />
-   </styleClass>
 </HBox>

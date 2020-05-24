@@ -1,6 +1,16 @@
+@font-face {
+    font-family: 'Comfortaa Bold';
+    src: url('../fonts/Comfortaa-Bold.ttf');
+}
 * {
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
+}
+.text {
+    -fx-font-family: "Comfortaa Bold";
+}
+.label{
+    -fx-font-family: "Comfortaa Bold";
 }
 #root {
     -fx-background-color: #f6f6f6;
@@ -14,29 +24,99 @@
 .radius5 {
     -fx-border-radius: 5;
 }
+
 .z-depth-1 {
-    -fx-effect: dropshadow(three-pass-box, black, 5, 0.1, 0, 1);
+    -fx-effect: dropshadow(GAUSSIAN, rgba(0, 0, 0, 0.27), 5, 0.2, 0, 1);
 }
+
 .z-depth-2 {
-    -fx-effect: dropshadow(three-pass-box, black, 10, 0.1, 0, 1);
+    -fx-effect: dropshadow(GAUSSIAN, rgba(0, 0, 0, 0.27), 10, 0.1, 0, 1);
 }
+
 .white {
     -fx-background-color: #ffffff;
+}
+.transparent {
+    -fx-background-color: transparent;
 }
 .border_bottom {
     -fx-border-color: #f0f0f0;
     -fx-border-style: solid;
     -fx-border-width: 0px 0px 1px 0px;
 }
-.itemChart {
-    -fx-background-color: #ffffff;
-}
 .slider .thumb {
-    -fx-background-color: #b221e7;  /* Hide the track */
+    -fx-background-color: #ff2525;  /* Hide the track */
 }
 .slider .track {
     -fx-background-color: #656565;
-    -fx-background-insets: 1 0 -1 0, 0, 1;
+    -fx-background-insets: 0.5 0 0.5 0, 0, 1;
     -fx-background-radius: 2.5, 2.5, 1.5;
     -fx-padding: 0.208333em;
+}
+#nodeLoad {
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-unit-increment: 10;
+    -fx-block-increment: 50;
+}
+
+.scroll-pane .scroll-bar:horizontal {
+    -fx-unit-increment: 5;
+    -fx-block-increment: 20;
+}
+
+.playlistBackground{
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+}
+.font-10 {
+    -fx-font-size: 10;
+}
+.font-11 {
+    -fx-font-size: 11;
+}
+.font-12 {
+    -fx-font-size: 12;
+}
+.font-13 {
+    -fx-font-size: 13;
+}
+.font-14 {
+    -fx-font-size: 14;
+}
+.font-15 {
+    -fx-font-size: 15;
+}
+.font-16 {
+    -fx-font-size: 16;
+}
+.font-17 {
+    -fx-font-size: 17;
+}
+.font-18 {
+    -fx-font-size: 18;
+}
+.font-22 {
+    -fx-font-size: 22;
+}
+
+.bg_radius-5 {
+    -fx-background-radius: 5;
+}
+
+.bg_radius-10 {
+    -fx-background-radius: 10;
+}
+
+.item_playlist_title {
+
+}
+.item_playlist_artist {
+
 }
