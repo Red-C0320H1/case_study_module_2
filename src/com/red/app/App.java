@@ -1,7 +1,8 @@
 package com.red.app;
 
+import com.red.app.config.ENV;
+import com.red.app.config.Resources;
 import com.red.app.controll.HomeController;
-import com.red.app.helpers.Str;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -24,21 +25,23 @@ public class App extends Application {
 	}
 
 	public void start(Stage primaryStage) throws Exception {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/res/layout/home.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(Resources.HOME));
 		root              = loader.load();
 		homeController    = loader.getController();
 		homeController.setActiveNodeLoad(true);
 
-		primaryStage.setTitle("ZingMp3 - C0320H1 CodeGym");
+		primaryStage.setTitle(ENV.APP_TITLE);
 
 		scene = new Scene(root);
 
-		primaryStage.getIcons().add(new Image(getClass().getResource("/res/images/Zing-MP3-favicon.png").toString()));
+		primaryStage.getIcons().add(new Image(getClass().getResource(ENV.APP_ICON).toString()));
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			public void handle(WindowEvent t) {
+				// Handle when closing the program.
+				// Delete the temporary file of the media player
 				Platform.exit();
 				System.exit(0);
 			}

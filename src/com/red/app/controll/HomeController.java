@@ -15,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -25,10 +27,13 @@ import javafx.util.Duration;
 public class HomeController {
     @FXML
     private AnchorPane nodeLoad;
+
     @FXML
     private AnchorPane body;
+
     @FXML
     private Pane playlistNode;
+
     @FXML
     private VBox playlistContent;
     @FXML
@@ -37,6 +42,9 @@ public class HomeController {
     private Label playlistCount2;
     @FXML
     private Label songTime;
+
+    @FXML
+    private ImageView thumb;
     @FXML
     private Label playTime;
     @FXML
@@ -49,6 +57,8 @@ public class HomeController {
     private Slider timeSlider;
     @FXML
     private Slider volumeSlider;
+
+
     private ArrayList<SoundInfo> playList;
     private SoundInfo sound;
     private Thread threadTemp;
@@ -94,6 +104,7 @@ public class HomeController {
         songTime.setText(FormatTime.parse(sound.getSeconds()));
         songName.setText(sound.getTitle());
         artists.setText(sound.getArtist());
+        thumb.setImage(new Image(sound.getThumbnail(), true));
     }
 
     public void setPlaySound(SoundInfo sound) {
@@ -118,7 +129,6 @@ public class HomeController {
             };
             threadTemp.start();
         }
-
     }
 
     public Slider getVolumeSlider() {

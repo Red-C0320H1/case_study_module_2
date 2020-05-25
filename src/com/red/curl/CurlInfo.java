@@ -1,11 +1,11 @@
 package com.red.curl;
 
 public interface CurlInfo {
-	int CURLINFO_STRING = 0x100000;
-	int CURLINFO_LONG = 0x200000;
-	int CURLINFO_DOUBLE = 0x300000;
-	int CURLINFO_SLIST = 0x400000;
-	int CURLINFO_MASK = 0x0fffff;
+	int CURLINFO_STRING   = 0x100000;
+	int CURLINFO_LONG     = 0x200000;
+	int CURLINFO_DOUBLE   = 0x300000;
+	int CURLINFO_SLIST    = 0x400000;
+	int CURLINFO_MASK     = 0x0fffff;
 	int CURLINFO_TYPEMASK = 0xf00000;
 
 	int CURLINFO_NONE = 0;

@@ -105,11 +105,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0" spacing="15.0">
                      <children>
-                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../images/b4461d303cba114b38429c6ea84d9fa2.jpg" />
-                           </image>
-                        </ImageView>
+                        <ImageView fx:id="thumb" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="70.0" prefWidth="200.0">
                            <children>
                               <VBox alignment="CENTER" prefHeight="58.0" prefWidth="406.0" spacing="5.0">
