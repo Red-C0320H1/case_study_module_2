@@ -1,89 +1,76 @@
 package com.red.app.media;
 
-import com.red.app.config.ConfigIO;
-import com.red.app.helpers.Helpers;
-import com.red.app.helpers.SoundIO;
-import java.io.File;
-import org.json.JSONException;
-import org.json.JSONObject;
+import javafx.scene.image.Image;
 
-public class SoundInfo {
-	private boolean isProfile;
-	private JSONObject data;
-	private SoundStream stream;
-	private String fileName;
+abstract class SoundInfo implements Sound {
+	private String ID;
+	private String SEO;
+	private String URL;
+	private String title;
+	private String artist;
+	private Image  thumbnail;
+	private int    duration;
 
-	public SoundInfo(JSONObject data) {
-		this.isProfile = false;
-		this.data = data;
-
-		try {
-			this.stream = new SoundStream(data.getString("id"));
-		} catch (JSONException var3) {
-			var3.printStackTrace();
-		}
+	public void setID(String ID) {
+		this.ID = ID;
 	}
 
-	public SoundInfo(String data) {
-		this.isProfile = true;
+	public void setURL(String url) {
+		this.URL = url;
 	}
 
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setArtist(String artist) {
+		this.artist = artist;
+	}
+
+	public void setThumbnail(Image thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public void setSEO(String SEO) {
+		this.SEO = SEO;
+	}
+
+	@Override
+	public String getID() {
+		return ID;
+	}
+
+	@Override
+	public String getURL() {
+		return URL;
+	}
+
+	@Override
 	public String getTitle() {
-		try {
-			return this.data.getString("title");
-		} catch (JSONException var2) {
-			return "";
-		}
+		return title;
 	}
 
+	@Override
 	public String getArtist() {
-		try {
-			return this.data.getString("artists_names");
-		} catch (JSONException var2) {
-			return "";
-		}
+		return artist;
 	}
 
-	public String getThumbnail() {
-		try {
-			return Helpers.patternURL(this.data.getString("thumbnail"));
-		} catch (JSONException var2) {
-			return "";
-		}
+	@Override
+	public Image getThumbnail() {
+		return thumbnail;
 	}
 
-	public int getSeconds(){
-		try {
-			return this.data.getInt("duration");
-		} catch (JSONException var2) {
-			return 0;
-		}
+	@Override
+	public int getSeconds() {
+		return duration;
 	}
 
-	public double getDuration() {
-		try {
-			return this.data.getDouble("duration");
-		} catch (JSONException var2) {
-			return 0.0D;
-		}
-	}
-
-	public SoundStream getStream() {
-		return this.stream;
-	}
-
-	private String getURITemp() {
-		SoundIO soundIO = new SoundIO();
-		String url = this.getStream().getStream128();
-		return soundIO.loadTemp(url).toURI().toString();
-	}
-
-	private String getURIFileDownload() {
-		File file = new File(ConfigIO.PROFILE_PATH + this.fileName);
-		return !file.exists() ? null : file.toURI().toString();
-	}
-
-	public String getURI() {
-		return !this.isProfile ? this.getURITemp() : this.getURIFileDownload();
+	@Override
+	public String getSEO() {
+		return SEO;
 	}
 }

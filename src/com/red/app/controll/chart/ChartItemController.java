@@ -2,15 +2,14 @@ package com.red.app.controll.chart;
 
 import com.red.app.App;
 import com.red.app.helpers.FormatTime;
-import com.red.app.media.SoundInfo;
+import com.red.app.media.Sound;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class ChartItemController {
-	public SoundInfo sound;
+	public Sound sound;
 	@FXML
 	public HBox item;
 	@FXML
@@ -27,18 +26,20 @@ public class ChartItemController {
 	public void initialize() {
 	}
 
-	public void setSound(int sortNumber, SoundInfo sound) {
+	public void setSound(int sortNumber, Sound sound) {
 		this.sortNumber.setText(String.valueOf(sortNumber));
 		this.sound = sound;
 		this.title.setText(sound.getTitle());
 		this.artist.setText(sound.getArtist());
-		this.thumb.setImage(new Image(sound.getThumbnail(), true));
+		this.thumb.setImage(sound.getThumbnail());
 		this.duration.setText(FormatTime.parse(sound.getSeconds()));
+
+		item.getStyleClass().add("." + sound.getSEO());
 	}
 
 	@FXML
 	public void handleClick() {
-		App.homeController.setPlaySound(this.sound);
+		App.homeController.PlaySound(this.sound);
 	}
 
 	@FXML

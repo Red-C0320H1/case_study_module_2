@@ -17,14 +17,16 @@ public class Request {
 		head.put(ConfigHTTP.KEY_CONNECTION,      ConfigHTTP.VALUE_CONNECTION);
 		head.put(ConfigHTTP.KEY_KEEP_ALIVE,      ConfigHTTP.VALUE_KEEP_ALIVE);
 		head.put(ConfigHTTP.KEY_EXPECT,          ConfigHTTP.VALUE_EXPECT);
-		curl.curl_setopt(ch, 10023, head);
+
+		curl.curl_setopt(ch, CurlOption.CURLOPT_HTTPHEADER, head);
 	}
 
+	// Content String data
 	public String grab_content(String url) {
 		CurlLib curl = CurlFactory.getInstance(ConfigHTTP.CURL_FACTORY);
 		Pointer ch = curl.curl_init();
 
-		this.setHeadHTTP(curl, ch);
+		//setHeadHTTP(curl, ch);
 
 		curl.curl_setopt(ch, CurlOption.CURLOPT_CONNECTTIMEOUT, ConfigHTTP.CONNECTTIMEOUT);
 		curl.curl_setopt(ch, CurlOption.CURLOPT_TIMEOUT,        ConfigHTTP.CONNECTTIMEOUT);
@@ -38,15 +40,15 @@ public class Request {
 		if (httpCode != null && 200 == Integer.valueOf(httpCode.toString())) {
 			return (String) html;
 		}
-
 		return  null;
 	}
 
+	// Stream data
 	public InputStream curl_getStream(String url) {
 		CurlLib curl = CurlFactory.getInstance(ConfigHTTP.CURL_FACTORY);
 		Pointer ch = curl.curl_init();
 
-		this.setHeadHTTP(curl, ch);
+		//setHeadHTTP(curl, ch);
 
 		curl.curl_setopt(ch, CurlOption.CURLOPT_CONNECTTIMEOUT, ConfigHTTP.CONNECTTIMEOUT);
 		curl.curl_setopt(ch, CurlOption.CURLOPT_TIMEOUT, ConfigHTTP.CONNECTTIMEOUT);

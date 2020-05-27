@@ -21,11 +21,11 @@
       <MediaView fx:id="mediaView" />
       <AnchorPane fx:id="header" prefHeight="50.0" prefWidth="190.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <AnchorPane fx:id="body" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
-      <Pane fx:id="playlistNode" layoutX="341.0" layoutY="251.0" prefHeight="450.0" prefWidth="350.0" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="0.0">
+      <Pane fx:id="playlistNode" layoutX="341.0" layoutY="251.0" prefHeight="450.0" prefWidth="350.0" visible="false" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="0.0">
          <children>
             <HBox prefHeight="41.0" prefWidth="350.0" style="-fx-background-radius: 10 10 0 0;" styleClass="playlistBackground">
                <children>
-                  <HBox alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="251.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="417.0">
                      <children>
                         <Label styleClass="font-14" text="Danh sách phát " textFill="WHITE">
                            <font>
@@ -52,6 +52,14 @@
                         <Insets left="22.0" />
                      </HBox.margin>
                   </HBox>
+                  <HBox alignment="CENTER" onMouseClicked="#onTogglePlaylist" prefHeight="41.0" prefWidth="189.0">
+                     <children>
+                        <Label prefHeight="0.0" prefWidth="11.0" styleClass="font-22" text="_" textFill="WHITE" />
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </HBox>
                </children>
             </HBox>
             <ScrollPane hbarPolicy="NEVER" layoutY="42.0" prefHeight="408.0" prefWidth="350.0" styleClass="playlistBackground">
@@ -74,7 +82,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="70.0" prefWidth="200.0" spacing="20.0">
                      <children>
-                        <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="btnPrevious" fitHeight="23.0" fitWidth="23.0" onMouseClicked="#onClickPrevious" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/pre.png" />
                            </image>
@@ -82,7 +90,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="btnPlay" fitHeight="40.0" fitWidth="40.0" onMouseClicked="#onClickButtonPlay" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/btn_play.png" />
                            </image>
@@ -90,7 +98,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </ImageView>
-                        <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="btnNext" fitHeight="23.0" fitWidth="23.0" onMouseClicked="#onClickNext" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/next.png" />
                            </image>
@@ -170,7 +178,7 @@
                      <children>
                         <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="23.0" prefWidth="23.0">
                            <children>
-                              <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fx:id="iconVolume" fitHeight="23.0" fitWidth="23.0" onMouseEntered="#onShowVolume" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../images/volume.png" />
                                  </image>
@@ -178,13 +186,13 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </ImageView>
-                              <Pane layoutX="-5.0" layoutY="-199.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="222.0" prefWidth="34.0" visible="false">
+                              <Pane fx:id="paneVolume" layoutX="-5.0" layoutY="-199.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#onShowVolume" onMouseExited="#onHidenVolume" prefHeight="222.0" prefWidth="34.0" visible="false">
                                  <children>
                                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#500961" height="175.0" stroke="#6c0779" strokeType="INSIDE" width="34.0" />
                                     <VBox alignment="CENTER" prefHeight="175.0" prefWidth="34.0">
                                        <children>
                                           <Label text="100" textFill="WHITE" />
-                                          <Slider fx:id="volumeSlider" orientation="VERTICAL" prefHeight="145.0" prefWidth="19.0" />
+                                          <Slider fx:id="volumeSlider" orientation="VERTICAL" prefHeight="145.0" prefWidth="19.0" value="100.0" />
                                           <Label text="0" textFill="WHITE" />
                                        </children>
                                     </VBox>
@@ -194,7 +202,7 @@
                         </Pane>
                         <Pane maxHeight="-Infinity" prefHeight="35.0" prefWidth="168.0" style="-fx-background-radius: 6; -fx-background-color: rgb(255,255,255,0.17);">
                            <children>
-                              <HBox alignment="CENTER" prefHeight="35.0" prefWidth="168.0">
+                              <HBox alignment="CENTER" onMouseClicked="#onTogglePlaylist" prefHeight="35.0" prefWidth="168.0">
                                  <children>
                                     <Label text="Danh sách phát " textFill="WHITE" />
                                     <Label text="(" textFill="WHITE" />

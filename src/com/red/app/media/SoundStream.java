@@ -25,30 +25,27 @@ public class SoundStream {
 		if (stream128 == null) {
 			downloadDataStream();
 		}
-
 		return stream128;
 	}
 
 	private void downloadDataStream() {
-		Map<String, String> param = new HashMap();
+		Map<String, String> param = new HashMap<String, String>();
 		param.put("id", id);
-		String urlData = null;
-
+		Request request = new Request();
 		try {
-			urlData = ZingAPI.buildAPIURL(ZingInfo.URL_STREAMMING, param);
-			Request request = new Request();
-			urlData = request.grab_content(urlData);
-			JSONObject json = new JSONObject(urlData);
+			String urlData  = ZingAPI.buildAPIURL(ZingInfo.URL_STREAMMING, param);
+			String content  = request.grab_content(urlData);
+			JSONObject json = new JSONObject(content);
 			int status = json.getInt("err");
 			if (status == 0) {
-				JSONObject data = json.getJSONObject("data");
+				JSONObject data        = json.getJSONObject("data");
 				JSONObject defaultData = data.getJSONObject("default");
 				stream128 = Helpers.patternURL(defaultData.getString("128"));
 			} else {
 				downloadDataStream();
 			}
-		} catch (InvalidKeyException | SignatureException | JSONException | NoSuchAlgorithmException var8) {
-			downloadDataStream();
+		} catch (NullPointerException | InvalidKeyException | SignatureException | JSONException | NoSuchAlgorithmException var8) {
+			System.out.println("err link 128");
 		}
 	}
 }

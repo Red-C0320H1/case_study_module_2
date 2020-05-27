@@ -12,32 +12,53 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class SoundPlayer {
+	private Media media;
 	private MediaPlayer mediaPlayer;
+	private Sound sound;
 
-	public SoundPlayer(SoundInfo sound) {
-		this.mediaPlayer = new MediaPlayer(new Media(sound.getURI()));
-		this.init();
+	public SoundPlayer(Sound sound) {
+		this.sound  = sound;
+		media       = new Media(sound.getURL());
+		mediaPlayer = new MediaPlayer(media);
+		init();
 	}
 
 	public void init() {
-		this.mediaPlayer.currentTimeProperty().addListener(new InvalidationListener() {
+		mediaPlayer.currentTimeProperty().addListener(new InvalidationListener() {
 			public void invalidated(Observable ov) {
-				SoundPlayer.this.updateValues();
+				updateValues();
 			}
 		});
-		this.mediaPlayer.setOnPlaying(new Runnable() {
+		mediaPlayer.setOnPlaying(new Runnable() {
 			public void run() {
 			}
 		});
-		this.mediaPlayer.setOnPaused(new Runnable() {
+		mediaPlayer.setOnPaused(new Runnable() {
 			public void run() {
-				System.out.println("onPaused");
 			}
 		});
-		this.mediaPlayer.setOnReady(new Runnable() {
+		mediaPlayer.setOnReady(new Runnable() {
 			public void run() {
-				App.homeController.setDuration(SoundPlayer.this.mediaPlayer.getMedia().getDuration());
-				SoundPlayer.this.updateValues();
+				App.homeController.setDuration(mediaPlayer.getMedia().getDuration());
+				updateValues();
+			}
+		});
+
+		mediaPlayer.setOnError(new Runnable() {
+			public void run() {
+				final String errorMessage = media.getError().getMessage();
+				// Handle errors during playback
+				System.out.println("MediaPlayer Error: " + errorMessage);
+			}
+		});
+
+		mediaPlayer.setCycleCount(1);
+
+		// media vừa play song,
+		mediaPlayer.setOnEndOfMedia(new Runnable() {
+			public void run() {
+				if (App.homeController.getSound() == sound)
+					App.homeController.onClickNext();
 			}
 		});
 	}
@@ -46,41 +67,61 @@ public class SoundPlayer {
 		Duration duration   = App.homeController.getDuration();
 		Label playTime      = App.homeController.getPlayTime();
 		Slider timeSlider   = App.homeController.getTimeSlider();
-		Slider volumeSlider = App.homeController.getVolumeSlider();
-		if (playTime != null && App.homeController.getTimeSlider() != null && App.homeController.getVolumeSlider() != null) {
-			Platform.runLater(new Runnable() {
-				public void run() {
-					Duration currentTime = SoundPlayer.this.mediaPlayer.getCurrentTime();
+		Platform.runLater(new Runnable() {
+			public void run() {
+				try {
+					Duration currentTime = mediaPlayer.getCurrentTime();
 					playTime.setText(FormatTime.parse(currentTime));
 					timeSlider.setDisable(duration.isUnknown());
 					if (!timeSlider.isDisabled() && duration.greaterThan(Duration.ZERO) && !timeSlider.isValueChanging()) {
 						timeSlider.setValue(currentTime.divide(duration).toMillis() * 100.0D);
 					}
-
-					if (!volumeSlider.isValueChanging()) {
-						volumeSlider.setValue((double)((int)Math.round(SoundPlayer.this.mediaPlayer.getVolume() * 100.0D)));
-					}
+				}catch (NullPointerException e){
 
 				}
-			});
-		}
-
+			}
+		});
 	}
 
 	public MediaPlayer getMediaPlayer() {
-		return this.mediaPlayer;
+		return mediaPlayer;
+	}
+
+	public boolean chekMediaPlayer(){
+		if (mediaPlayer == null)
+			return false;
+		return true;
 	}
 
 	public void play() {
-		if (this.mediaPlayer != null) {
-			this.mediaPlayer.play();
+		if (mediaPlayer != null) {
+			mediaPlayer.play();
 		}
 	}
 
 	public void stop() {
-		if (this.mediaPlayer != null) {
-			this.mediaPlayer.stop();
+		if (mediaPlayer != null) {
+			mediaPlayer.stop();
 		}
+	}
 
+	public void destroy() {
+		try{
+			mediaPlayer.stop();
+			mediaPlayer.dispose();
+		}catch (NullPointerException e){
+		}finally {
+			mediaPlayer = null;
+			sound = null;
+		}
+	}
+
+	public void seek(Duration duration){
+		if (chekMediaPlayer()) {
+			mediaPlayer.seek(duration);
+		}
+	}
+	public void resetSeek(){
+		seek(Duration.ZERO);
 	}
 }

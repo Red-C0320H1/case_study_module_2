@@ -6,14 +6,17 @@ import com.red.app.controll.HomeController;
 import com.red.app.controll.playlist.ItemPlaylistController;
 import com.red.app.helpers.Helpers;
 import com.red.app.helpers.Request;
-import com.red.app.media.SoundInfo;
+import com.red.app.media.Sound;
+import com.red.app.media.SoundURL;
 import com.red.app.zingmp3.ZingAPI;
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import com.red.app.zingmp3.ZingInfo;
 import javafx.application.Platform;
@@ -108,10 +111,12 @@ public class ChartController {
             loadPlaylist = true;
         }
 
+        ArrayList<Sound> arrayListSound = homeController.getPlayList();
+
         try {
             for(int i = 0; i < items.length(); ++i) {
                 JSONObject item = items.getJSONObject(i);
-                SoundInfo sound = new SoundInfo(item);
+                Sound sound = new SoundURL(item);
                 FXMLLoader itemPrefab = new FXMLLoader(App.getResource(Resources.BODY_CHART_ITEM));
                 HBox itemNode = itemPrefab.load();
                 ChartItemController itemController = itemPrefab.getController();
@@ -125,12 +130,18 @@ public class ChartController {
                     ItemPlaylistController itemPlaylist = itemPlaylistXML.getController();
                     itemPlaylist.setSound(sound);
                     homeController.getPlaylistContent().getChildren().add(itemPl);
-                    homeController.getPlayList().add(sound);
+                    arrayListSound.add(sound);
                 }
 
                 if (i < items.length() - 1) {
                     itemNode.getStyleClass().add("border_bottom");
                 }
+            }
+            if (loadPlaylist) {
+                Random rd = new Random();
+                int soundRandom = rd.nextInt(items.length());
+                homeController.setSoundPane(arrayListSound.get(soundRandom));
+                //App.homeController.setIndexPlayList(soundRandom);
             }
         } catch (IOException | JSONException var14) {
             var14.printStackTrace();
