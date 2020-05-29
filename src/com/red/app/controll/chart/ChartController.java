@@ -141,7 +141,6 @@ public class ChartController {
                 Random rd = new Random();
                 int soundRandom = rd.nextInt(items.length());
                 homeController.setSoundPane(arrayListSound.get(soundRandom));
-                //App.homeController.setIndexPlayList(soundRandom);
             }
         } catch (IOException | JSONException var14) {
             var14.printStackTrace();

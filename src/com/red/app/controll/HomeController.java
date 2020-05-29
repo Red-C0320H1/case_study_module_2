@@ -2,6 +2,7 @@ package com.red.app.controll;
 
 import com.red.app.App;
 import com.red.app.config.Resources;
+import com.red.app.controll.home.FindBox;
 import com.red.app.helpers.FormatTime;
 import com.red.app.helpers.Helpers;
 import com.red.app.media.Sound;
@@ -10,15 +11,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
@@ -28,10 +33,26 @@ import javafx.util.Duration;
 
 public class HomeController {
     @FXML
+    private AnchorPane master;
+
+    @FXML
     private AnchorPane nodeLoad;
 
     @FXML
     private AnchorPane body;
+
+    @FXML
+    private VBox findBox;
+
+    @FXML
+    private VBox findDiv;
+
+    @FXML
+    private TextField inputText;
+
+    @FXML
+    private HBox nodeCloseFind;
+
 
     @FXML
     private Pane playlistNode;
@@ -99,6 +120,17 @@ public class HomeController {
 
         ICON_PLAY  = new Image(Resources.IMAGE_MEDIA_PLAY, true);
         ICON_PAUSE = new Image(Resources.IMAGE_MEDIA_PAUSE, true);
+
+        // text search focus
+        inputText.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
+            {
+                if (newPropertyValue) {
+                    findBoxFocus();
+                }
+            }
+        });
 
         Helpers helpers = new Helpers();
 
@@ -304,5 +336,29 @@ public class HomeController {
             setSoundPane(soundNext);
         }catch (IndexOutOfBoundsException e){
         }
+    }
+
+    // Find
+    public void findBoxFocus() {
+        findBox.getStyleClass().add("focused");
+        findDiv.setVisible(true);
+        //findDiv.setPrefHeight(367);
+        findDiv.setPrefHeight(Control.USE_COMPUTED_SIZE);
+        FindBox.getInstance().showHotKey();
+    }
+
+    @FXML
+    public void findOnReleased(){
+        FindBox.getInstance().search(inputText.getCharacters().toString());
+    }
+
+    @FXML
+    public void findOnToggleSearch(){
+        findBox.getStyleClass().clear();
+        findBox.getStyleClass().add("findBox");
+        findDiv.setVisible(false);
+        findDiv.setPrefHeight(0);
+
+        master.requestFocus();
     }
 }

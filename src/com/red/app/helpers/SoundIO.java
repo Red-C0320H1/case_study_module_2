@@ -17,8 +17,6 @@ public class SoundIO {
 	private SoundIO() {
 	}
 
-	;
-
 	public static SoundIO getInstance() {
 		if (instance == null) {
 			synchronized (SoundIO.class) {
