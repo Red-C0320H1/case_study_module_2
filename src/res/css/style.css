@@ -57,6 +57,11 @@
     -fx-background-color: rgb(255, 255, 255);
 }
 
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
@@ -143,4 +148,9 @@
     -fx-border-color: #ffffff;
     -fx-background-radius: 20 20 0 0;
     -fx-effect: dropshadow(GAUSSIAN, rgba(0, 0, 0, 0.27), 10, 0.1, 0, 1)
+}
+
+.itemHeadFindHover{
+    -fx-background-color: rgba(0, 0, 0, 0.08);
+    -fx-background-radius: 8;
 }

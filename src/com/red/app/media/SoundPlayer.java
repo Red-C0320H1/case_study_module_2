@@ -39,7 +39,7 @@ public class SoundPlayer {
 		});
 		mediaPlayer.setOnReady(new Runnable() {
 			public void run() {
-				App.homeController.setDuration(mediaPlayer.getMedia().getDuration());
+				App.getHome().setDuration(mediaPlayer.getMedia().getDuration());
 				updateValues();
 			}
 		});
@@ -57,16 +57,16 @@ public class SoundPlayer {
 		// media vừa play song,
 		mediaPlayer.setOnEndOfMedia(new Runnable() {
 			public void run() {
-				if (App.homeController.getSound() == sound)
-					App.homeController.onClickNext();
+				if (App.getHome().getSound() == sound)
+					App.getHome().onClickNext();
 			}
 		});
 	}
 
 	protected void updateValues() {
-		Duration duration   = App.homeController.getDuration();
-		Label playTime      = App.homeController.getPlayTime();
-		Slider timeSlider   = App.homeController.getTimeSlider();
+		Duration duration   = App.getHome().getDuration();
+		Label playTime      = App.getHome().getPlayTime();
+		Slider timeSlider   = App.getHome().getTimeSlider();
 		Platform.runLater(new Runnable() {
 			public void run() {
 				try {

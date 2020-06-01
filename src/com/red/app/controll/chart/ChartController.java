@@ -104,8 +104,8 @@ public class ChartController {
     }
 
     private void showList(JSONArray items) {
-        Helpers helpers = new Helpers();
-        HomeController homeController = App.homeController;
+        Helpers helpers = Helpers.getInstance();
+        HomeController homeController = App.getHome();
         boolean loadPlaylist = false;
         if (homeController.getPlaylistContent().getChildren().size() == 0) {
             loadPlaylist = true;

@@ -6,6 +6,16 @@ import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 
 public class Helpers {
+	private static Helpers instance;
+	private Helpers(){
+	}
+
+	public static Helpers getInstance(){
+		if (instance == null){
+			instance = new Helpers();
+		}
+		return instance;
+	}
 	public static String secondstoMinutes(double number) {
 		double durationTime = number / 60.0D;
 		String[] durations = String.valueOf(durationTime).split("\\.");

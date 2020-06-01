@@ -2,7 +2,7 @@ package com.red.app.controll;
 
 import com.red.app.App;
 import com.red.app.config.Resources;
-import com.red.app.controll.home.FindBox;
+import com.red.app.controll.header.FindBox;
 import com.red.app.helpers.FormatTime;
 import com.red.app.helpers.Helpers;
 import com.red.app.media.Sound;
@@ -16,10 +16,10 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -46,6 +46,10 @@ public class HomeController {
 
     @FXML
     private VBox findDiv;
+
+    @FXML
+    private VBox headFindContent;
+    //
 
     @FXML
     private TextField inputText;
@@ -93,14 +97,9 @@ public class HomeController {
 
 
     private ArrayList<Sound> playList;
-    private Sound   sound;
-    private Thread      threadTemp;
-    private SoundPlayer soundPlayer;
-    private Duration    duration;
-
-
-    private Image ICON_PLAY;
-    private Image ICON_PAUSE;
+    private Sound            sound;
+    private SoundPlayer      soundPlayer;
+    private Duration         duration;
 
     private int indexPlayList  = 0;
     private double volume      = 1.0D;
@@ -117,22 +116,18 @@ public class HomeController {
         AnchorPane chart = chartXML.load();
         this.body.getChildren().add(chart);
 
-
-        ICON_PLAY  = new Image(Resources.IMAGE_MEDIA_PLAY, true);
-        ICON_PAUSE = new Image(Resources.IMAGE_MEDIA_PAUSE, true);
-
         // text search focus
         inputText.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue)
             {
                 if (newPropertyValue) {
-                    findBoxFocus();
+                    FindBox.getInstance().onFocus();
                 }
             }
         });
 
-        Helpers helpers = new Helpers();
+        Helpers helpers = Helpers.getInstance();
 
         helpers.setAnchorNodeFull(chart, 0.0D, 0.0D, 0.0D, 0.0D);
         timeSlider.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -243,14 +238,6 @@ public class HomeController {
         return playList;
     }
 
-    public Image getICON_PAUSE() {
-        return ICON_PAUSE;
-    }
-
-    public Image getICON_PLAY() {
-        return ICON_PLAY;
-    }
-
     public Sound getSound() {
         return sound;
     }
@@ -267,7 +254,6 @@ public class HomeController {
         return soundPlayer;
     }
 
-
     //
     @FXML
     public void onClickButtonPlay(){
@@ -283,15 +269,15 @@ public class HomeController {
                     mediaPlayer.play();
                     isPlay = true;
 
-                    btnPlay.setImage(ICON_PAUSE);
+                    btnPlay.setImage(Resources.ICON_PAUSE);
                 } else {
                     mediaPlayer.pause();
                     isPlay = false;
-                    btnPlay.setImage(ICON_PLAY);
+                    btnPlay.setImage(Resources.ICON_PLAY);
                 }
             }else {
                 isPlay = true;
-                btnPlay.setImage(ICON_PAUSE);
+                btnPlay.setImage(Resources.ICON_PAUSE);
                 loadMediaPlayer();
             }
         }
@@ -338,27 +324,39 @@ public class HomeController {
         }
     }
 
-    // Find
-    public void findBoxFocus() {
-        findBox.getStyleClass().add("focused");
-        findDiv.setVisible(true);
-        //findDiv.setPrefHeight(367);
-        findDiv.setPrefHeight(Control.USE_COMPUTED_SIZE);
-        FindBox.getInstance().showHotKey();
-    }
-
     @FXML
     public void findOnReleased(){
         FindBox.getInstance().search(inputText.getCharacters().toString());
     }
 
     @FXML
-    public void findOnToggleSearch(){
-        findBox.getStyleClass().clear();
-        findBox.getStyleClass().add("findBox");
-        findDiv.setVisible(false);
-        findDiv.setPrefHeight(0);
+    public void findOnPressed(KeyEvent e)
+    {
+        if(e.getCode() == KeyCode.ENTER) {
 
-        master.requestFocus();
+        } else if(e.getCode() == KeyCode.ESCAPE) {
+            FindBox.getInstance().hidden();
+        }
+    }
+
+    @FXML
+    public void hiddenSearch(){
+        FindBox.getInstance().hidden();
+    }
+
+    public VBox getHeadFindContent() {
+        return headFindContent;
+    }
+
+    public VBox getFindBox() {
+        return findBox;
+    }
+
+    public VBox getFindDiv() {
+        return findDiv;
+    }
+
+    public AnchorPane getMaster() {
+        return master;
     }
 }

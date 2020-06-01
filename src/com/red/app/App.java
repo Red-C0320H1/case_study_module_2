@@ -15,16 +15,24 @@ import javafx.stage.WindowEvent;
 import java.net.URL;
 
 public class App extends Application {
-	public static AnchorPane root;
-	public static Scene scene;
-	public static HomeController homeController;
+	private static AnchorPane root;
+	private static Scene scene;
+	private static HomeController homeController;
 
 	public static URL getResource(String path){
 		return App.class.getResource(path);
 	}
 
+	public static AnchorPane getRoot(){
+		return root;
+	}
+
+	public static HomeController getHome(){
+		return homeController;
+	}
+
 	public void start(Stage primaryStage) throws Exception {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource(Resources.HOME));
+		FXMLLoader loader = new FXMLLoader(getResource(Resources.HOME));
 		root              = loader.load();
 		homeController    = loader.getController();
 		homeController.setActiveNodeLoad(true);

@@ -35,7 +35,7 @@ public class ItemPlaylistController {
 
 	@FXML
 	public void handleClick() {
-		App.homeController.PlaySound(this.sound);
+		App.getHome().PlaySound(this.sound);
 	}
 
 	@FXML
