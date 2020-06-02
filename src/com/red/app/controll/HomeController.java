@@ -4,6 +4,7 @@ import com.red.app.App;
 import com.red.app.config.Resources;
 import com.red.app.controll.header.FindBox;
 import com.red.app.controll.playlist.PlaylistController;
+import com.red.app.controll.profile.ProfileController;
 import com.red.app.controll.search.Search;
 import com.red.app.helpers.FormatTime;
 import com.red.app.helpers.Helpers;
@@ -181,7 +182,13 @@ public class HomeController {
             songTime.setText(FormatTime.parse(sound.getSeconds()));
             songName.setText(sound.getTitle());
             artists.setText(sound.getArtist());
-            thumb.setImage(sound.getThumbnail());
+
+            if (sound.getThumbnail() != null){
+                thumb.setImage(sound.getThumbnail());
+            }else{
+                thumb.setImage(Resources.ICON_DEFAULT);
+            }
+
             if (isPlay) loadMediaPlayer();
 
             PlaylistController playList = PlaylistController.getInstance();
@@ -397,6 +404,26 @@ public class HomeController {
         Helpers helpers = Helpers.getInstance();
 
         helpers.setAnchorNodeFull(chart, 0.0D, 0.0D, 0.0D, 0.0D);
+
+        Search.getInstance().setControll(null);
+    }
+
+    @FXML
+    public void onClickGoToProfile(){
+        body.getChildren().clear();
+        FXMLLoader prifileXML = new FXMLLoader(App.getResource(Resources.BODY_PROFILE));
+        AnchorPane prifile = null;
+        try {
+            prifile = prifileXML.load();
+            ProfileController.profile = prifileXML.getController();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        body.getChildren().add(prifile);
+
+        Helpers helpers = Helpers.getInstance();
+
+        helpers.setAnchorNodeFull(prifile, 0.0D, 0.0D, 0.0D, 0.0D);
 
         Search.getInstance().setControll(null);
     }

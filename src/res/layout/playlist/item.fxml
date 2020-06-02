@@ -30,7 +30,7 @@
             <Label fx:id="duration" styleClass="font-11" textFill="#cecece" />
          </children>
       </HBox>
-      <ImageView fx:id="iconRemove" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#handleRemove" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
+      <ImageView fx:id="iconRemove" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#handleRemove" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="16.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

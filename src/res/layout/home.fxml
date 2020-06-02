@@ -32,7 +32,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="56.0" prefWidth="128.0" text="CÁ NHÂN">
+                        <Label alignment="CENTER" onMouseClicked="#onClickGoToProfile" prefHeight="56.0" prefWidth="128.0" text="CÁ NHÂN">
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>

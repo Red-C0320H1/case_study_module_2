@@ -58,5 +58,13 @@ public class ItemPlaylistController {
 	public void handleRemove() {
 		PlaylistController playlist = PlaylistController.getInstance();
 		playlist.remove(sound);
+
+		this.sound      = null;
+		this.item       = null;
+		this.iconRemove = null;
+		this.thumb      = null;
+		this.title      = null;
+		this.duration   = null;
+		this.artist     = null;
 	}
 }
