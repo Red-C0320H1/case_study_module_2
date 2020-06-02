@@ -46,7 +46,6 @@ public class ChartItemController {
 
 	@FXML
 	public void handleClick() {
-		System.out.println("play");
 		App.getHome().PlaySound(this.sound);
 	}
 

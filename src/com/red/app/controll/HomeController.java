@@ -290,10 +290,8 @@ public class HomeController {
 
     @FXML
     public void onClickPrevious(){
-        System.out.println(indexPlayList);
         PlaylistController playList = PlaylistController.getInstance();
         indexPlayList--;
-        System.out.println(indexPlayList);
         if (indexPlayList < 0) indexPlayList = playList.getPlayList().size()-1;
         try {
             Sound soundPre = playList.getPlayList().get(indexPlayList);
@@ -323,10 +321,8 @@ public class HomeController {
 
     @FXML
     public void onClickNext(){
-        System.out.println(indexPlayList);
         PlaylistController playList = PlaylistController.getInstance();
         indexPlayList++;
-        System.out.println(indexPlayList);
         if (indexPlayList >= playList.getPlayList().size()) indexPlayList = 0;
         try {
             Sound soundNext = playList.getPlayList().get(indexPlayList);

@@ -29,6 +29,9 @@
                </children>
             </VBox>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </HBox>
       <HBox alignment="CENTER" onMouseClicked="#handleClick" prefHeight="60.0" prefWidth="281.0">
          <children>
@@ -38,6 +41,9 @@
                </font>
             </Label>
          </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </HBox>
       <HBox fx:id="optional" alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="204.0" spacing="8.0" visible="false">
          <children>

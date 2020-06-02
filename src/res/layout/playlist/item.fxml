@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,19 +9,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="item" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleClick" onMouseEntered="#handleEntered" onMouseExited="#handleExited" prefHeight="56.0" prefWidth="350.0" styleClass="bg_radius-10" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.red.app.controll.playlist.ItemPlaylistController">
+<AnchorPane fx:id="item" maxHeight="-Infinity" minHeight="-Infinity" onMouseEntered="#handleEntered" onMouseExited="#handleExited" prefHeight="56.0" prefWidth="350.0" styleClass="bg_radius-10" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.red.app.controll.playlist.ItemPlaylistController">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="291.0" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER_LEFT" onMouseClicked="#handleClick" prefHeight="56.0" prefWidth="291.0" spacing="12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="thumb" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../images/b4461d303cba114b38429c6ea84d9fa2.jpg" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="thumb" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
             <VBox alignment="CENTER_LEFT">
                <children>
-                  <Label fx:id="title" styleClass="font-12" text="Label" textFill="WHITE" />
-                  <Label fx:id="artist" styleClass="font-11" text="Label" textFill="#e4e4e4" />
+                  <Label fx:id="title" styleClass="font-12" textFill="WHITE" />
+                  <Label fx:id="artist" styleClass="font-11" textFill="#e4e4e4" />
                </children>
             </VBox>
          </children>
@@ -28,10 +25,21 @@
             <Insets left="20.0" />
          </padding>
       </HBox>
-      <HBox alignment="CENTER_LEFT" layoutX="298.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="56.0" prefWidth="52.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="298.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER_LEFT" layoutX="298.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleClick" prefHeight="56.0" prefWidth="52.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="298.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="duration" styleClass="font-11" text="05:05" textFill="#cecece" />
+            <Label fx:id="duration" styleClass="font-11" textFill="#cecece" />
          </children>
       </HBox>
+      <ImageView fx:id="iconRemove" fitHeight="24.0" fitWidth="24.0" onMouseClicked="#handleRemove" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <image>
+            <Image url="@../../images/remove.png" />
+         </image>
+      </ImageView>
    </children>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
 </AnchorPane>

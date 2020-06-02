@@ -43,6 +43,7 @@ public class PlaylistController {
 
 	public void remove(Sound sound){
 		playList.remove(sound);
+		update();
 	}
 
 	public void update(){

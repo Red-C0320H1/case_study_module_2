@@ -15,6 +15,9 @@ public class ItemPlaylistController {
 	public AnchorPane item;
 
 	@FXML
+	public ImageView iconRemove;
+
+	@FXML
 	public ImageView thumb;
 	@FXML
 	public Label title;
@@ -41,15 +44,19 @@ public class ItemPlaylistController {
 	@FXML
 	public void handleEntered() {
 		item.getStyleClass().add("itemPlaylisHover");
+		iconRemove.setVisible(true);
 	}
 
 	@FXML
 	public void handleExited() {
 		item.getStyleClass().clear();
 		item.setStyle(null);
+		iconRemove.setVisible(false);
 	}
 
-	private void resetClass(){
-		item.getStyleClass().add("bg_radius-10");
+	@FXML
+	public void handleRemove() {
+		PlaylistController playlist = PlaylistController.getInstance();
+		playlist.remove(sound);
 	}
 }

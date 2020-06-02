@@ -67,14 +67,16 @@ public class SoundURL extends SoundInfo {
 			}
 		}
 
-		try {
-			File file = new File(new URI(super.getURL()));
-			if (!file.exists()){
-				setURL(null);
-				return getURL();
+		url = super.getURL();
+		if (!url.equals("-1")) {
+			try {
+				File file = new File(new URI(super.getURL()));
+				if (!file.exists()) {
+					setURL(null);
+					return getURL();
+				}
+			} catch (URISyntaxException e) {
 			}
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
 		}
 		return super.getURL();
 	}
