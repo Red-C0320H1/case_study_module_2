@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
@@ -55,19 +56,18 @@ public class FindBox {
 		HomeController home = App.getHome();
 		home.getFindBox().getStyleClass().add("focused");
 		home.getFindDiv().setVisible(true);
-		//findDiv.setPrefHeight(367);
 		home.getFindDiv().setPrefHeight(Control.USE_COMPUTED_SIZE);
 		showHotKey();
 	}
 
 	public void search(String string) {
 		string = string.trim();
-		if (string.length() > 1){
+		if (string.length() > 0){
 			cloneSearch(string);
 		}
 	}
 	private void cloneSearch(String key) {
-		String urlData = "https://ac.zingmp3.vn/suggestKeyword/desktop?num=10&query="+key;
+		String urlData = "https://ac.zingmp3.vn/suggestKeyword/desktop?num=10&query="+ URLEncoder.encode(key);
 		try {
 			Request request  = new Request();
 			String dataChart = request.grab_content(urlData);
@@ -133,15 +133,12 @@ public class FindBox {
 	}
 	private void cloneHotKey() {
 		Map<String, String> paramChart = new HashMap<String, String>();
-		String urlData = null;
 		try {
-			urlData = ZingAPI.buildAPIURL(ZingInfo.URL_SEARCH_HOT_KEY, paramChart);
+			String urlData = ZingAPI.buildAPIURL(ZingInfo.URL_SEARCH_HOT_KEY, paramChart);
 			Request request = new Request();
 			String dataChart = request.grab_content(urlData);
 
-			JSONObject json = null;
-
-			json = new JSONObject(dataChart);
+			JSONObject json = new JSONObject(dataChart);
 			int status = json.getInt("err");
 			if (status != 0) {
 				cloneHotKey();

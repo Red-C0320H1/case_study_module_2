@@ -1,5 +1,6 @@
 package com.red.app.controll.header;
 
+import com.red.app.controll.search.Search;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -17,7 +18,7 @@ public class HeadSearchItem {
 
 	@FXML
 	public void onClick(){
-		System.out.println("click: " + text.getText());
+		Search.getInstance().search(text.getText());
 		FindBox.getInstance().hidden();
 	}
 

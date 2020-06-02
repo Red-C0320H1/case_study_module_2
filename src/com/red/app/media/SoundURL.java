@@ -37,11 +37,14 @@ public class SoundURL extends SoundInfo {
 
 				String urlStream  = stream.getStream128();
 
-				SoundIO soundIO = SoundIO.getInstance();
-				String URI = soundIO.download(urlStream, path, name);
+				if (urlStream != null){
+					SoundIO soundIO = SoundIO.getInstance();
+					String URI = soundIO.download(urlStream, path, name);
 
-				System.out.println(URI);
-				setURL(URI);
+					setURL(URI);
+				}else{
+					setURL("-1");
+				}
 			}
 		}
 		return super.getURL();

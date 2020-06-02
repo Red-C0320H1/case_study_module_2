@@ -3,6 +3,7 @@ package com.red.app.controll;
 import com.red.app.App;
 import com.red.app.config.Resources;
 import com.red.app.controll.header.FindBox;
+import com.red.app.controll.search.Search;
 import com.red.app.helpers.FormatTime;
 import com.red.app.helpers.Helpers;
 import com.red.app.media.Sound;
@@ -26,6 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
@@ -116,6 +118,10 @@ public class HomeController {
         AnchorPane chart = chartXML.load();
         this.body.getChildren().add(chart);
 
+        Helpers helpers = Helpers.getInstance();
+
+        helpers.setAnchorNodeFull(chart, 0.0D, 0.0D, 0.0D, 0.0D);
+
         // text search focus
         inputText.focusedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
@@ -127,9 +133,6 @@ public class HomeController {
             }
         });
 
-        Helpers helpers = Helpers.getInstance();
-
-        helpers.setAnchorNodeFull(chart, 0.0D, 0.0D, 0.0D, 0.0D);
         timeSlider.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 timeSlider.setValueChanging(true);
@@ -194,11 +197,17 @@ public class HomeController {
         if (soundPlayer != null) {
             soundPlayer.destroy();
         }
-        soundPlayer = new SoundPlayer(sound);
-        mediaView.setMediaPlayer(soundPlayer.getMediaPlayer());
-        soundPlayer.resetSeek();
-        soundPlayer.getMediaPlayer().setVolume(volume);
-        soundPlayer.play();
+
+        String URL = sound.getURL();
+        if (URL.equals("-1")){
+            System.out.println("Not URL Stream");
+        }else{
+            soundPlayer = new SoundPlayer(sound);
+            mediaView.setMediaPlayer(soundPlayer.getMediaPlayer());
+            soundPlayer.resetSeek();
+            soundPlayer.getMediaPlayer().setVolume(volume);
+            soundPlayer.play();
+        }
     }
 
     public void PlaySound(Sound sound){
@@ -326,14 +335,13 @@ public class HomeController {
 
     @FXML
     public void findOnReleased(){
-        FindBox.getInstance().search(inputText.getCharacters().toString());
+        FindBox.getInstance().search(inputText.getText());
     }
 
     @FXML
-    public void findOnPressed(KeyEvent e)
-    {
+    public void findOnPressed(KeyEvent e){
         if(e.getCode() == KeyCode.ENTER) {
-
+            Search.getInstance().search(inputText.getText());
         } else if(e.getCode() == KeyCode.ESCAPE) {
             FindBox.getInstance().hidden();
         }
@@ -358,5 +366,30 @@ public class HomeController {
 
     public AnchorPane getMaster() {
         return master;
+    }
+
+    public AnchorPane getBody() {
+        return body;
+    }
+
+    public TextField getInputText() {
+        return inputText;
+    }
+
+    @FXML
+    public void onClickGoToZingChart(){
+        body.getChildren().clear();
+        FXMLLoader chartXML = new FXMLLoader(App.getResource(Resources.BODY_CHART));
+        AnchorPane chart = null;
+        try {
+            chart = chartXML.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        body.getChildren().add(chart);
+
+        Helpers helpers = Helpers.getInstance();
+
+        helpers.setAnchorNodeFull(chart, 0.0D, 0.0D, 0.0D, 0.0D);
     }
 }

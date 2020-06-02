@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="item" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleClick" onMouseEntered="#handleEntered" onMouseExited="#handleExited" prefHeight="60.0" prefWidth="600.0" styleClass="white" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.red.app.controll.search.SearchItem">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="470.0" spacing="20.0">
+         <children>
+            <ImageView fx:id="thumb" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+            <VBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="400.0">
+               <children>
+                  <Label fx:id="title" styleClass="font-12">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="artist" styleClass="font-11" textFill="#797979">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="duration" styleClass="font-11" textFill="#797979">
+               <font>
+                  <Font name="Segoe UI Semibold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets left="30.0" />
+   </padding>
+</HBox>

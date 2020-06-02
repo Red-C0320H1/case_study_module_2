@@ -18,6 +18,7 @@ public class SoundPlayer {
 
 	public SoundPlayer(Sound sound) {
 		this.sound  = sound;
+
 		media       = new Media(sound.getURL());
 		mediaPlayer = new MediaPlayer(media);
 		init();

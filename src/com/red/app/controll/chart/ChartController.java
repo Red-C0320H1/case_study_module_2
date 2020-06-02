@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ChartController {
+    public static ArrayList<Sound> charts = new ArrayList<Sound>();
     public static String dataChart;
     @FXML VBox content;
 
@@ -75,15 +76,16 @@ public class ChartController {
     }
 
     public void initialize() {
-        getData();
+        if (charts.size() == 0) {
+            getData();
+        }else{
+            showPage();
+        }
     }
 
     public void showPage() {
-        if (dataChart == null) {
-            getData();
-        } else {
+        if (charts.size() == 0) {
             JSONObject json = null;
-
             try {
                 json = new JSONObject(dataChart);
                 int status = json.getInt("err");
@@ -100,6 +102,24 @@ public class ChartController {
             } catch (JSONException var7) {
                 getData();
             }
+        } else {
+            Helpers helpers = Helpers.getInstance();
+            try {
+                for (int i = 0; i < charts.size(); ++i) {
+                    Sound sound = charts.get(i);
+                    FXMLLoader itemPrefab = new FXMLLoader(App.getResource(Resources.BODY_CHART_ITEM));
+                    HBox itemNode = itemPrefab.load();
+
+                    ChartItemController itemController = itemPrefab.getController();
+                    itemController.setSound(i + 1, sound);
+                    content.getChildren().add(itemNode);
+                    helpers.setAnchorNodeFull(itemNode, 0.0D, 0.0D, 0.0D, 0.0D);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            HomeController homeController = App.getHome();
+            homeController.setActiveNodeLoad(false);
         }
     }
 
@@ -131,6 +151,7 @@ public class ChartController {
                     itemPlaylist.setSound(sound);
                     homeController.getPlaylistContent().getChildren().add(itemPl);
                     arrayListSound.add(sound);
+                    charts.add(sound);
                 }
 
                 if (i < items.length() - 1) {
