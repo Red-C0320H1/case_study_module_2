@@ -4,6 +4,7 @@ import com.red.app.App;
 import com.red.app.config.Resources;
 import com.red.app.controll.HomeController;
 import com.red.app.controll.playlist.ItemPlaylistController;
+import com.red.app.controll.playlist.PlaylistController;
 import com.red.app.helpers.Helpers;
 import com.red.app.helpers.Request;
 import com.red.app.media.Sound;
@@ -104,8 +105,10 @@ public class ChartController {
             }
         } else {
             Helpers helpers = Helpers.getInstance();
+
+            int size = charts.size();
             try {
-                for (int i = 0; i < charts.size(); ++i) {
+                for (int i = 0; i < size; ++i) {
                     Sound sound = charts.get(i);
                     FXMLLoader itemPrefab = new FXMLLoader(App.getResource(Resources.BODY_CHART_ITEM));
                     HBox itemNode = itemPrefab.load();
@@ -114,6 +117,10 @@ public class ChartController {
                     itemController.setSound(i + 1, sound);
                     content.getChildren().add(itemNode);
                     helpers.setAnchorNodeFull(itemNode, 0.0D, 0.0D, 0.0D, 0.0D);
+
+                    if (i < size - 1) {
+                        itemNode.getStyleClass().add("border_bottom");
+                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -131,7 +138,7 @@ public class ChartController {
             loadPlaylist = true;
         }
 
-        ArrayList<Sound> arrayListSound = homeController.getPlayList();
+        PlaylistController playList = PlaylistController.getInstance();
 
         try {
             for(int i = 0; i < items.length(); ++i) {
@@ -143,16 +150,8 @@ public class ChartController {
                 itemController.setSound(i + 1, sound);
                 this.content.getChildren().add(itemNode);
                 helpers.setAnchorNodeFull(itemNode, 0.0D, 0.0D, 0.0D, 0.0D);
-                if (loadPlaylist) {
-                    FXMLLoader itemPlaylistXML = new FXMLLoader(App.getResource(Resources.PLAYLIST_ITEM));
-                    AnchorPane itemPl = itemPlaylistXML.load();
-                    helpers.setAnchorNodeFull(itemPl, 0.0D, 0.0D, 0.0D, 0.0D);
-                    ItemPlaylistController itemPlaylist = itemPlaylistXML.getController();
-                    itemPlaylist.setSound(sound);
-                    homeController.getPlaylistContent().getChildren().add(itemPl);
-                    arrayListSound.add(sound);
-                    charts.add(sound);
-                }
+
+                charts.add(sound);
 
                 if (i < items.length() - 1) {
                     itemNode.getStyleClass().add("border_bottom");
@@ -161,7 +160,10 @@ public class ChartController {
             if (loadPlaylist) {
                 Random rd = new Random();
                 int soundRandom = rd.nextInt(items.length());
-                homeController.setSoundPane(arrayListSound.get(soundRandom));
+                Sound play = charts.get(soundRandom);
+                homeController.setSoundPane(play);
+                playList.add(play);
+                playList.update();
             }
         } catch (IOException | JSONException var14) {
             var14.printStackTrace();

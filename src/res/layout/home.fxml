@@ -109,7 +109,7 @@
                               <Font size="32.0" />
                            </font>
                         </Label>
-                        <Label styleClass="font-14" text="0" textFill="WHITE">
+                        <Label fx:id="playlistCount2" styleClass="font-14" text="0" textFill="WHITE">
                            <font>
                               <Font size="32.0" />
                            </font>
@@ -278,7 +278,7 @@
                                  <children>
                                     <Label text="Danh sách phát " textFill="WHITE" />
                                     <Label text="(" textFill="WHITE" />
-                                    <Label text="0" textFill="WHITE" />
+                                    <Label fx:id="playlistCount1" text="0" textFill="WHITE" />
                                     <Label text=")" textFill="WHITE" />
                                  </children>
                               </HBox>

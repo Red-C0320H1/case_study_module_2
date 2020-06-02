@@ -6,6 +6,7 @@ import com.red.app.media.Sound;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 public class ChartItemController {
@@ -23,6 +24,9 @@ public class ChartItemController {
 	@FXML
 	public Label artist;
 
+	@FXML
+	private AnchorPane optional;
+
 	public void initialize() {
 	}
 
@@ -39,16 +43,29 @@ public class ChartItemController {
 
 	@FXML
 	public void handleClick() {
+		System.out.println("play");
 		App.getHome().PlaySound(this.sound);
 	}
 
 	@FXML
 	public void handleEntered() {
 		this.item.setStyle("-fx-background-color:#fafafa;");
+		optional.setVisible(true);
 	}
 
 	@FXML
 	public void handleExited() {
 		this.item.setStyle("-fx-background-color:#ffffff;");
+		optional.setVisible(false);
+	}
+
+	@FXML
+	public void onClickAddPlaylis(){
+		System.out.println("add playlist");
+	}
+
+	@FXML
+	public void onClickDownload(){
+		System.out.println("download");
 	}
 }

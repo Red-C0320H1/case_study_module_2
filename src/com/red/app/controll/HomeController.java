@@ -3,6 +3,7 @@ package com.red.app.controll;
 import com.red.app.App;
 import com.red.app.config.Resources;
 import com.red.app.controll.header.FindBox;
+import com.red.app.controll.playlist.PlaylistController;
 import com.red.app.controll.search.Search;
 import com.red.app.helpers.FormatTime;
 import com.red.app.helpers.Helpers;
@@ -18,7 +19,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -27,7 +27,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
@@ -59,7 +58,6 @@ public class HomeController {
     @FXML
     private HBox nodeCloseFind;
 
-
     @FXML
     private Pane playlistNode;
 
@@ -68,16 +66,16 @@ public class HomeController {
 
     @FXML
     private VBox playlistContent;
+
     @FXML
     private Label playlistCount1;
+
     @FXML
     private Label playlistCount2;
-
 
     // Controll media
     @FXML
     private ImageView btnPlay;
-
 
     // Info media
     @FXML
@@ -98,7 +96,6 @@ public class HomeController {
     private Slider volumeSlider;
 
 
-    private ArrayList<Sound> playList;
     private Sound            sound;
     private SoundPlayer      soundPlayer;
     private Duration         duration;
@@ -112,8 +109,6 @@ public class HomeController {
     private boolean isPlay        = false;
 
     public void initialize() throws IOException {
-        this.playList = new ArrayList<Sound>();
-
         FXMLLoader chartXML = new FXMLLoader(App.getResource(Resources.BODY_CHART));
         AnchorPane chart = chartXML.load();
         this.body.getChildren().add(chart);
@@ -189,7 +184,9 @@ public class HomeController {
             thumb.setImage(sound.getThumbnail());
             if (isPlay) loadMediaPlayer();
 
-            indexPlayList = playList.indexOf(sound);
+            PlaylistController playList = PlaylistController.getInstance();
+
+            indexPlayList = playList.getPlayList().indexOf(sound);
         }
     }
 
@@ -243,10 +240,6 @@ public class HomeController {
         this.duration = duration;
     }
 
-    public ArrayList<Sound> getPlayList() {
-        return playList;
-    }
-
     public Sound getSound() {
         return sound;
     }
@@ -294,10 +287,11 @@ public class HomeController {
 
     @FXML
     public void onClickPrevious(){
+        PlaylistController playList = PlaylistController.getInstance();
         indexPlayList--;
-        if (indexPlayList < 0) indexPlayList = playList.size()-1;
+        if (indexPlayList < 0) indexPlayList = playList.getPlayList().size()-1;
         try {
-            Sound soundPre = playList.get(indexPlayList);
+            Sound soundPre = playList.getPlayList().get(indexPlayList);
             setSoundPane(soundPre);
         }catch (IndexOutOfBoundsException e){
         }
@@ -324,10 +318,11 @@ public class HomeController {
 
     @FXML
     public void onClickNext(){
+        PlaylistController playList = PlaylistController.getInstance();
         indexPlayList++;
-        if (indexPlayList >= playList.size()) indexPlayList = 0;
+        if (indexPlayList >= playList.getPlayList().size()) indexPlayList = 0;
         try {
-            Sound soundNext = playList.get(indexPlayList);
+            Sound soundNext = playList.getPlayList().get(indexPlayList);
             setSoundPane(soundNext);
         }catch (IndexOutOfBoundsException e){
         }
@@ -376,6 +371,14 @@ public class HomeController {
         return inputText;
     }
 
+    public Label getPlaylistCount1() {
+        return playlistCount1;
+    }
+
+    public Label getPlaylistCount2() {
+        return playlistCount2;
+    }
+
     @FXML
     public void onClickGoToZingChart(){
         body.getChildren().clear();
@@ -391,5 +394,7 @@ public class HomeController {
         Helpers helpers = Helpers.getInstance();
 
         helpers.setAnchorNodeFull(chart, 0.0D, 0.0D, 0.0D, 0.0D);
+
+        Search.getInstance().setControll(null);
     }
 }

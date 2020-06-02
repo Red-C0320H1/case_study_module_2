@@ -80,9 +80,7 @@ public class Search {
 				e.printStackTrace();
 			}
 		}
-
-		System.out.println(items);
-
+		
 		if (items == null){
 			return;
 		}
@@ -150,5 +148,9 @@ public class Search {
 		}
 
 		controll.addItems(items);
+	}
+
+	public void setControll(SearchControll controll) {
+		this.controll = controll;
 	}
 }

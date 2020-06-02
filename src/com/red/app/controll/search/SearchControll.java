@@ -76,4 +76,8 @@ public class SearchControll {
 			e.printStackTrace();
 		}
 	}
+
+	public VBox getContent() {
+		return content;
+	}
 }
