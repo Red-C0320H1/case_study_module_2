@@ -100,7 +100,7 @@ public class ChartController {
                 JSONArray items = data.getJSONArray("items");
                 JSONObject chart = data.getJSONObject("chart");
                 this.showList(items);
-            } catch (JSONException var7) {
+            } catch (NullPointerException | JSONException var7) {
                 getData();
             }
         } else {
@@ -161,9 +161,8 @@ public class ChartController {
                 Random rd = new Random();
                 int soundRandom = rd.nextInt(items.length());
                 Sound play = charts.get(soundRandom);
-                homeController.setSoundPane(play);
                 playList.add(play);
-                playList.update();
+                homeController.setSoundPane(play);
             }
         } catch (IOException | JSONException var14) {
             var14.printStackTrace();

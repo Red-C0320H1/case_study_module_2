@@ -6,7 +6,6 @@ import com.red.app.controll.HomeController;
 import com.red.app.helpers.Helpers;
 import com.red.app.media.Sound;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -29,7 +28,17 @@ public class PlaylistController {
 	}
 
 	public void add(Sound sound){
-		playList.add(sound);
+		boolean check = true;
+		for (Sound item: playList){
+			if (item.getSEO().equals(sound.getSEO())){
+				check = false;
+				break;
+			}
+		}
+		if (check){
+			playList.add(sound);
+			update();
+		}
 	}
 
 	public void remove(Sound sound){
@@ -38,6 +47,9 @@ public class PlaylistController {
 
 	public void update(){
 		HomeController home = App.getHome();
+
+		home.getPlaylistContent().getChildren().clear();
+
 		String count = String.valueOf(playList.size());
 		home.getPlaylistCount1().setText(count);
 		home.getPlaylistCount2().setText(count);

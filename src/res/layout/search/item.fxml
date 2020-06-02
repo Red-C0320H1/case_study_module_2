@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="item" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleClick" onMouseEntered="#handleEntered" onMouseExited="#handleExited" prefHeight="60.0" prefWidth="600.0" styleClass="white" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.red.app.controll.search.SearchItem">
+<HBox fx:id="item" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" onMouseEntered="#handleEntered" onMouseExited="#handleExited" prefHeight="60.0" prefWidth="900.0" styleClass="white" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.red.app.controll.search.SearchItem">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="470.0" spacing="20.0">
+      <HBox alignment="CENTER_LEFT" onMouseClicked="#handleClick" prefHeight="60.0" prefWidth="555.0" spacing="20.0">
          <children>
             <ImageView fx:id="thumb" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
             <VBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="400.0">
@@ -28,7 +30,7 @@
             </VBox>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER" onMouseClicked="#handleClick" prefHeight="60.0" prefWidth="281.0">
          <children>
             <Label fx:id="duration" styleClass="font-11" textFill="#797979">
                <font>
@@ -36,6 +38,32 @@
                </font>
             </Label>
          </children>
+      </HBox>
+      <HBox fx:id="optional" alignment="CENTER_RIGHT" prefHeight="60.0" prefWidth="204.0" spacing="8.0" visible="false">
+         <children>
+            <ImageView fitHeight="19.0" fitWidth="19.0" onMouseClicked="#onClickDownload" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/download.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="19.0" fitWidth="19.0" onMouseClicked="#onClickAddPlaylis" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/add_playlist.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <padding>
+            <Insets right="40.0" />
+         </padding>
       </HBox>
    </children>
    <padding>

@@ -1,8 +1,11 @@
 package com.red.app.controll.chart;
 
 import com.red.app.App;
+import com.red.app.controll.playlist.PlaylistController;
 import com.red.app.helpers.FormatTime;
+import com.red.app.helpers.SoundIO;
 import com.red.app.media.Sound;
+import com.red.app.media.SoundURL;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -49,7 +52,7 @@ public class ChartItemController {
 
 	@FXML
 	public void handleEntered() {
-		this.item.setStyle("-fx-background-color:#fafafa;");
+		item.setStyle("-fx-background-color:#fafafa;");
 		optional.setVisible(true);
 	}
 
@@ -61,11 +64,14 @@ public class ChartItemController {
 
 	@FXML
 	public void onClickAddPlaylis(){
-		System.out.println("add playlist");
+		PlaylistController playlist = PlaylistController.getInstance();
+		playlist.add(sound);
 	}
 
 	@FXML
 	public void onClickDownload(){
-		System.out.println("download");
+		SoundURL soundURL = (SoundURL) sound;
+		soundURL.setIsDownload(true);
+		SoundIO.getInstance().download(sound);
 	}
 }
