@@ -20,8 +20,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 public class SearchControll {
-	private int            kmess;
-	private int            page;
+	private int kmess;
+	private int page;
 
 	@FXML
 	private VBox content;

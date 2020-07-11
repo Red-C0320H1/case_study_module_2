@@ -68,6 +68,9 @@ public class ChartController {
 
         try {
             urlData = ZingAPI.buildAPIURL(ZingInfo.URL_DETAIL, paramChart);
+
+            //System.out.println(urlData);
+
             Request request = new Request();
             dataChart = request.grab_content(urlData);
             return true;

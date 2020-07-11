@@ -4,6 +4,7 @@ import com.red.app.App;
 import com.red.app.config.Resources;
 import com.red.app.controll.HomeController;
 import com.red.app.helpers.Helpers;
+import com.red.app.helpers.Log;
 import com.red.app.helpers.Request;
 import com.red.app.zingmp3.ZingAPI;
 import com.red.app.zingmp3.ZingInfo;
@@ -15,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -67,8 +69,8 @@ public class FindBox {
 		}
 	}
 	private void cloneSearch(String key) {
-		String urlData = "https://ac.zingmp3.vn/suggestKeyword/desktop?num=10&query="+ URLEncoder.encode(key);
 		try {
+			String urlData = "https://ac.zingmp3.vn/suggestKeyword/desktop?num=10&query=" + URLEncoder.encode(key, "UTF-8");
 			Request request  = new Request();
 			String dataChart = request.grab_content(urlData);
 
@@ -91,7 +93,8 @@ public class FindBox {
 				lists.add(obj.getString("keyword"));
 			}
 			show(lists);
-		} catch (NullPointerException | JSONException var4) {
+		} catch (UnsupportedEncodingException | JSONException e) {
+			//e.printStackTrace();
 		}
 	}
 

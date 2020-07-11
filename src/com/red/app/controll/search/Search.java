@@ -4,6 +4,7 @@ import com.red.app.App;
 import com.red.app.config.Resources;
 import com.red.app.controll.header.FindBox;
 import com.red.app.helpers.Helpers;
+import com.red.app.helpers.Log;
 import com.red.app.helpers.Request;
 import com.red.app.zingmp3.ZingAPI;
 import com.red.app.zingmp3.ZingInfo;
@@ -107,9 +108,10 @@ public class Search {
 		int start = page*kmess;
 
 		urlData.append("&start="+start);
-		Request request = new Request();
 
-		String dataChart = request.grab_content(urlData.toString());
+		Request request  = new Request();
+		String url       = urlData.toString();
+		String dataChart = request.grab_content(url);
 
 		try {
 			JSONObject json = new JSONObject(dataChart);
@@ -119,6 +121,7 @@ public class Search {
 			}
 			return json;
 		} catch (NullPointerException | JSONException var4) {
+			Log.info(var4.toString());
 		}
 		return null;
 	}

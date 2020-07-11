@@ -2,6 +2,7 @@ package com.red.app.media;
 
 import com.red.app.config.ConfigIO;
 import com.red.app.helpers.Helpers;
+import com.red.app.helpers.Log;
 import com.red.app.helpers.SoundIO;
 import com.red.app.helpers.Str;
 import javafx.scene.image.Image;

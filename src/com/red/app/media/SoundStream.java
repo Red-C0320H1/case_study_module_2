@@ -36,6 +36,7 @@ public class SoundStream {
 			String urlData  = ZingAPI.buildAPIURL(ZingInfo.URL_STREAMMING, param);
 			String content  = request.grab_content(urlData);
 			JSONObject json = new JSONObject(content);
+
 			int status = json.getInt("err");
 			if (status == 0) {
 				JSONObject data        = json.getJSONObject("data");

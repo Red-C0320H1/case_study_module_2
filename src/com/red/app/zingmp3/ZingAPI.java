@@ -1,5 +1,8 @@
 package com.red.app.zingmp3;
 
+import com.red.app.helpers.Log;
+
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -73,8 +76,12 @@ public class ZingAPI {
 	// buildQuery
 	public static String buildQuery(Map<String, String> param, String sq){
 		String cer = "";
-		for (String key : param.keySet()) {
-			cer += key + "=" + URLEncoder.encode(param.get(key)) + sq;
+		try {
+			for (String key : param.keySet()) {
+				cer += key + "=" + URLEncoder.encode(param.get(key), "UTF-8") + sq;
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		}
 		return cer;
 	}
