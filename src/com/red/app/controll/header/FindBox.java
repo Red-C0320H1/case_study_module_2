@@ -94,7 +94,7 @@ public class FindBox {
 			}
 			show(lists);
 		} catch (UnsupportedEncodingException | JSONException e) {
-			//e.printStackTrace();
+			// Log.info(e.toString());
 		}
 	}
 
@@ -110,7 +110,7 @@ public class FindBox {
 			Helpers helpers = Helpers.getInstance();
 			helpers.setAnchorNodeH(item, 0.0, 0.0);
 		} catch (IOException e) {
-			e.printStackTrace();
+			// Log.info(e.toString());
 		}
 	}
 
@@ -124,7 +124,7 @@ public class FindBox {
 				}
 				isLoadHotKey = true;
 			} catch (JSONException e) {
-				e.printStackTrace();
+				// Log.info(e.toString());
 			}
 		}
 	}
@@ -149,7 +149,8 @@ public class FindBox {
 			}
 
 			data = json.getJSONArray("data");
-		} catch (InvalidKeyException | SignatureException | NoSuchAlgorithmException | JSONException var4) {
+		} catch (InvalidKeyException | SignatureException | NoSuchAlgorithmException | JSONException e) {
+			// Log.info(e.toString());
 		}
 	}
 }

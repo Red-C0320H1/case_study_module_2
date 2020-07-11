@@ -30,6 +30,8 @@ public class Search {
 	private int            pageCount;
 	private String         key;
 
+	private int timeGet = 0;
+
 	private Search(){
 		kmess = 20;
 		page  = 0;
@@ -43,10 +45,8 @@ public class Search {
 	}
 
 	public void search(String string) {
-		App.getHome().getInputText().setText(string);
-
-		page  = 0;
-		key   = string;
+		page = 0;
+		key  = string;
 
 		FindBox.getInstance().hidden();
 		createURL();
@@ -65,6 +65,11 @@ public class Search {
 
 			pageCount = (int) Math.ceil(total/Search.getInstance().getKmess());
 		} catch (JSONException e) {
+			timeGet++;
+			// Log.info(e.toString());
+			if (timeGet < 8){
+				search(string);
+			}
 		}
 
 		if (controll == null){
@@ -78,15 +83,15 @@ public class Search {
 
 				Helpers.getInstance().setAnchorNodeFull(searchNode, 0,0,0,0);
 			} catch (IOException e) {
-				e.printStackTrace();
+				//Log.info(e.toString());
 			}
 		}
-		
-		if (items == null){
-			return;
-		}
 
-		controll.setData(key, pageCount, items);
+		if (items != null){
+			Log.info("Info !null");
+			controll.setData(items);
+		}
+		timeGet = 0;
 	}
 
 	private void createURL() {
@@ -100,6 +105,7 @@ public class Search {
 		} catch (NoSuchAlgorithmException | SignatureException | InvalidKeyException e) {
 			createURL();
 		}
+		Log.info(url);
 	}
 
 	private JSONObject getContent(){
@@ -148,6 +154,7 @@ public class Search {
 			JSONObject data = json.getJSONObject("data");
 			items           = data.getJSONArray("items");
 		} catch (JSONException e) {
+			// Log.info(e.toString());
 		}
 
 		controll.addItems(items);

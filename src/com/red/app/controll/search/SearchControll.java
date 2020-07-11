@@ -3,13 +3,13 @@ package com.red.app.controll.search;
 import com.red.app.App;
 import com.red.app.config.Resources;
 import com.red.app.helpers.Helpers;
+import com.red.app.helpers.Log;
 import com.red.app.media.Sound;
 import com.red.app.media.SoundURL;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -45,10 +45,10 @@ public class SearchControll {
 		});
 	}
 
-	public void setData(String key, int page, JSONArray items){
-		content.getChildren().clear();
-		addItems(items);
-	}
+//	public void setData(String key, int page, JSONArray items){
+//		content.getChildren().clear();
+//		addItems(items);
+//	}
 
 	public void setData(JSONArray items){
 		content.getChildren().clear();
@@ -73,7 +73,7 @@ public class SearchControll {
 				Helpers.getInstance().setAnchorNodeFull(itemNode, 0.0D, 0.0D, 0.0D, 0.0D);
 			}
 		} catch (JSONException e) {
-			e.printStackTrace();
+			// Log.info(e.toString());
 		}
 	}
 
