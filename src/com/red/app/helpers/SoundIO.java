@@ -25,28 +25,25 @@ public class SoundIO {
 
 	public boolean curl_dowload(String url, File outputFile) {
 		Request request = new Request();
-		InputStream data = request.curl_getStream(url);
+		InputStream data     = request.curl_getStream(url);
+		OutputStream dataOut = null;
+
 		if (data != null) {
-			BufferedInputStream bIn = null;
-			BufferedOutputStream bOut = null;
-
 			try {
-				bIn = new BufferedInputStream(data);
-				bOut = new BufferedOutputStream(new FileOutputStream(outputFile));
+				final int bufferSize = 2048;
+				final byte[] buffer  = new byte[bufferSize];
 
-				while (true) {
-					int datum = bIn.read();
-					if (datum == -1) {
-						break;
-					}
-					bOut.write(datum);
+				dataOut = new FileOutputStream(outputFile);
+
+				int charsRead;
+				while((charsRead = data.read(buffer, 0, buffer.length)) > 0) {
+					dataOut.write(buffer, 0, charsRead);
 				}
-				bOut.flush();
+				dataOut.flush();
 
-				bIn.close();
-				bOut.close();
+				data.close();
+				dataOut.close();
 				return true;
-
 			} catch (IOException var8) {
 			}
 		}
@@ -55,25 +52,24 @@ public class SoundIO {
 	}
 
 	public boolean grab_dowload(String urlPath, File outputFile) {
-		BufferedInputStream bIn = null;
-		BufferedOutputStream bOut = null;
-
+		InputStream data     = null;
+		OutputStream dataOut = null;
 		try {
+			final int bufferSize = 2048;
+			final byte[] buffer  = new byte[bufferSize];
+
 			URL url = new URL(urlPath);
-			bIn = new BufferedInputStream(url.openStream());
-			bOut = new BufferedOutputStream(new FileOutputStream(outputFile));
+			data     = url.openStream();
+			dataOut  = new FileOutputStream(outputFile);
 
-			while (true) {
-				int datum = bIn.read();
-				if (datum == -1) {
-					break;
-				}
-				bOut.write(datum);
+			int charsRead;
+			while((charsRead = data.read(buffer, 0, buffer.length)) > 0) {
+				dataOut.write(buffer, 0, charsRead);
 			}
-			bOut.flush();
+			dataOut.flush();
 
-			bIn.close();
-			bOut.close();
+			data.close();
+			dataOut.close();
 			return true;
 
 		} catch (IOException var7) {
